@@ -1,63 +1,13 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <title></title>
-    <script>
-      // Before you reuse this script you may want to have your head examined
-      // Copyright 1999 InsideDHTML.com, LLC.
-      function doBlink() {
-        // Blink, Blink, Blink...
-        var blink = document.all.tags("BLINK");
-        for (var i=0; i < blink.length; i++){
-          blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "";
-        }
-      }
-      function startBlink() {
-        // Make sure it is IE4
-        if (document.all){
-          setInterval("doBlink()",1000);
-        }
-      }
-      window.onload = startBlink;
-    </script>
-    <style>
-    blink {
-      text-decoration: blink;
-    }
-    </style>
-    <style>
-      @-webkit-keyframes blink {
-        from {
-          opacity: 1.0;
-        }
-        to {
-          opacity: 0.0;
-        }
-      }
-      blink {
-        -webkit-animation-name: blink;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
-        -webkit-animation-duration: 1s;
-      }
-    </style>
-    <link href='css.css'  rel="stylesheet">
-    <script src='code.js' rel="stylesheet"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <h1>
-      <blink style="text-decoration: blink">
-        Hello, computer!
-      </blink>
+      <blink style="text-decoration: blink">Hello, computer!</blink>
     </h1>
-    <script>
-      setTimeout(function(){
-        document.querySelector('button').onclick = function () {
-          addFive();
-        }
-      },200);
-    </script>
   </body>
   <span>
     <span>0</span>
@@ -65,5 +15,5 @@
   <p>=</p>
   <button>add five</button>
   <button onclick="addTen()">add ten</button>
-  <script src='code2.js' rel="stylesheet"></script>
+  <script type="text/javascript" src="script.js" async></script>
 </html>
