@@ -29,3 +29,10 @@ Other option would be to use angular as the project fits the MVC model
 ## Tools used
 Atom.io
 Safari + Web Inspector
+
+## Final note
+I am most comfortable with vanilla js, but understand that frameworks like Angular speed up the build process quite a lot, and I would like to have the opportunity to use it.
+Unfortunately I have a history of 'not so great teams', so I've been using git alone and my workflow is entirely my creation, its all probably a bit messy and incomplete from the perspective of established teams. I look forward to join a team where I can improve my skills using these tools and learn how to properly run tests.
+
+---
+[davidegaspar](mailto:me@davidegaspar.com)
