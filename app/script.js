@@ -1,5 +1,5 @@
 var o={history:[]};
-window.onload = startBlink;
+//window.onload = startBlink;
 
 element = document.createElement('div');
 setTimeout(function(){
@@ -43,16 +43,16 @@ function addTen () {
   oReq.addEventListener("load", reqListener);
   oReq.open("GET", "http://www.httpbin.org/delay/1", true);oReq.send();
 }
-function doBlink() {
-  // Blink, Blink, Blink...
-  var blink = document.all.tags("BLINK");
-  for (var i=0; i < blink.length; i++){
-    blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "";
-  }
-}
-function startBlink() {
-  // Make sure it is IE4
-  if (document.all){
-    setInterval("doBlink()",1000);
-  }
-}
+// function doBlink() {
+//   // Blink, Blink, Blink...
+//   var blink = document.all.tags("BLINK");
+//   for (var i=0; i < blink.length; i++){
+//     blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "";
+//   }
+// }
+// function startBlink() {
+//   // Make sure it is IE4
+//   if (document.all){
+//     setInterval("doBlink()",1000);
+//   }
+// }
