@@ -29,7 +29,14 @@ window.addEventListener('load',function(){
     statusDisplay.innerHTML = '';
     singleBtn.disabled=false;
     doubleBtn.disabled=false;
-  })
+  });
+  h5calc.errAdd(function(){
+    resultDisplay.innerHTML = h5calc.total();
+    historyDisplay.innerHTML = h5calc.getLog().join(' + ');
+    statusDisplay.innerHTML = '! try again';
+    singleBtn.disabled=false;
+    doubleBtn.disabled=false;
+  });
 });
 
 /*
@@ -45,15 +52,22 @@ function H5Calc(){
     if(typeof willAdd=='function')willAdd();
     ready = false;
     var xhr = new XMLHttpRequest();
-    xhr.addEventListener("load",function(){
-      log.push(f);
-      ready = true;
-      if(typeof didAdd=='function')didAdd();
-    });
+    xhr.onreadystatechange=function(){
+      if (xhr.readyState==4){
+        if(xhr.status==200){
+          log.push(f);
+          ready = true;
+          if(typeof didAdd=='function')didAdd();
+        }else{
+          ready = true;
+          if(typeof didAdd=='function')errAdd();
+        }
+      }
+    }
     xhr.open("GET","http://www.httpbin.org/delay/1",true);
     xhr.send();
   },
-  willAdd,didAdd;
+  willAdd,didAdd,errAdd;
   //public
   this.single=function(){add(fingers);}
   this.double=function(){add(fingers*2);}
@@ -68,6 +82,7 @@ function H5Calc(){
   }
   this.willAdd=function(f){willAdd=f}
   this.didAdd=function(f){didAdd=f}
+  this.errAdd=function(f){errAdd=f}
   return this;
 }
 
