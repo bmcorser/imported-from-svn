@@ -1,48 +1,76 @@
-var o={history:[]};
-//window.onload = startBlink;
-
-element = document.createElement('div');
-setTimeout(function(){
-  document.querySelector('body').insertBefore(element, document.querySelector('button'));
-  element.textContent = 0;
-}, 200);
-
-setTimeout(function(){
-  document.querySelector('button').onclick = function () {
-    addFive();
-  }
-},200);
-
-element = document.createElement('div');
-setTimeout(function(){
-  document.querySelector('body').insertBefore(element, document.querySelector('button'));
-}, 500);
+window.addEventListener('load',function(){
+  var
+  historyDisplay=document.querySelector('.history'),
+  resultDisplay=document.querySelector('.result'),
+  statusDisplay=document.querySelector('.status');
+  singleBtn=document.querySelector('.single'),
+  doubleBtn=document.querySelector('.double'),
+  h5calc = new H5Calc();
+  // events
+  singleBtn.addEventListener('click',function(){
+    if(h5calc.isReady()){
+      singleBtn.disabled=true;
+      doubleBtn.disabled=true;
+      statusDisplay.innerHTML = 'adding...';
+      h5calc.single();
+    }
+  });
+  doubleBtn.addEventListener('click',function(){
+    if(h5calc.isReady()){
+      singleBtn.disabled=true;
+      doubleBtn.disabled=true;
+      statusDisplay.innerHTML = 'adding...';
+      h5calc.double();
+    }
+  });
+  h5calc.didAdd(function(){
+    resultDisplay.innerHTML = h5calc.total();
+    historyDisplay.innerHTML = h5calc.getLog().join(' + ');
+    statusDisplay.innerHTML = '';
+    singleBtn.disabled=false;
+    doubleBtn.disabled=false;
+  })
+});
 
 /*
-  functions
+  lib
 */
-function reqListener () {
-   element.textContent = oldNumber + parseInt(10);
-   element2.remove();
+function H5Calc(){
+  //private
+  var
+  log=[],
+  ready=true,
+  fingers=5,
+  add=function(f){
+    if(typeof willAdd=='function')willAdd();
+    ready = false;
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load",function(){
+      log.push(f);
+      ready = true;
+      if(typeof didAdd=='function')didAdd();
+    });
+    xhr.open("GET","http://www.httpbin.org/delay/1",true);
+    xhr.send();
+  },
+  willAdd,didAdd;
+  //public
+  this.single=function(){add(fingers);}
+  this.double=function(){add(fingers*2);}
+  this.getLog=function(){return log;}
+  this.isReady=function(){return ready;}
+  this.total=function(){
+    var t=0;
+    for(var k=0;k<log.length;k++){
+      t+=log[k];
+    }
+    return t;
+  }
+  this.willAdd=function(f){willAdd=f}
+  this.didAdd=function(f){didAdd=f}
+  return this;
 }
-function addhistory (Added) {
-  document.querySelector('span:last-child').appendChild(document.createElement('span'));
-  document.querySelector('span:last-child').textContent += ' + ' + Added;
-}
-function addFive () {
-  addhistory(5);
-  element.innerHTML = parseInt(element.innerHTML) + 5;
-}
-function addTen () {
-  oldNumber = parseInt(element.textContent);
-  addhistory(10);
-  element2 = document.createElement('div');
-  element2.textContent = 'adding';
-  document.querySelector('body').insertBefore(element2, document.querySelector('button'));
-  var oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", reqListener);
-  oReq.open("GET", "http://www.httpbin.org/delay/1", true);oReq.send();
-}
+
 // function doBlink() {
 //   // Blink, Blink, Blink...
 //   var blink = document.all.tags("BLINK");
