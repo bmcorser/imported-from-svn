@@ -13,6 +13,7 @@ I choose this simple project because I'm still working full time during the week
 6. link to UI on window load
 7. setup events on window load
 8. class H5Calc that represents the model
+9. handle errors in xhr request
 
 ## Tools
 Atom.io
