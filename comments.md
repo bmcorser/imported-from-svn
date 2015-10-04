@@ -4,7 +4,6 @@ Hi I'm Davide!
 I choose this simple project because I'm still working full time during the week and have other 'homework' from other companies to complete this weekend.
 
 ## Tasks
-
 1. move all css/js to single files given the small size of each to reduce number of requests and increase readability
 2. reorder files content without breaking the execution path for better readability
 3. separate markup style and scripting
@@ -15,6 +14,18 @@ I choose this simple project because I'm still working full time during the week
 8. class H5Calc that represents the model
 9. handle errors in xhr request
 
-## Tools
+## Next steps
+10. init npm module
+11. create gruntfile
+12. setup tasks clean, copy, lessc and jshint
+13. setup tasks to minify html(htmlmin), css(cssmin), js(uglifyjs)
+14. init bower package
+15. bower install [yosegi](https://github.com/davidegaspar/yosegi), a less mixins library built by me to speed up UI styling
+16. bower install fontawesome, an icon font I use regularly
+
+## AngularJS
+Other option would be to use angular as the project fits the MVC model
+
+## Tools used
 Atom.io
 Safari + Web Inspector
