@@ -1,11 +1,36 @@
-/*
-  lib
-*/
-var H5Calc = function () {
-  //private
+var H5Calc = function (opts) {
+
   var log = [];
   var ready = true;
   var fingers = 5;
+
+  var setButtonsDisabled = function (value) {
+    opts.singleBtn.disabled = value;
+    opts.doubleBtn.disabled = value;
+  };
+
+  var total = function () {
+    var t = 0;
+    for(var k = 0; k < log.length; k++){
+      t += log[k];
+    }
+    return t;
+  };
+
+  var addComplete = function () {
+    opts.resultDisplay.innerHTML = total();
+    opts.historyDisplay.innerHTML = log.join(' + ');
+    opts.statusDisplay.innerHTML = '';
+    setButtonsDisabled(false);
+  };
+
+  var addErr = function () {
+    opts.resultDisplay.innerHTML = total();
+    opts.historyDisplay.innerHTML = log.join(' + ');
+    opts.statusDisplay.innerHTML = '! try again';
+    setButtonsDisabled(false);
+  };
+
   var add = function (f) {
     ready = false;
     var xhr = new XMLHttpRequest();
@@ -14,94 +39,47 @@ var H5Calc = function () {
         if(xhr.status == 200){
           log.push(f);
           ready = true;
-          if (typeof didAdd == 'function') {
-            didAdd();
-          }
+          addComplete();
         } else {
           ready = true;
-          if (typeof didAdd == 'function') {
-            errAdd();
-          }
+          addErr();
         }
       }
     };
-    xhr.open("GET","http://www.httpbin.org/delay/1",true);
+    xhr.open("GET", "http://www.httpbin.org/delay/1", true);
     xhr.send();
   };
-  var didAdd, errAdd;
 
-  //public
-  this.single = function () {
-    add(fingers);
-  };
-  this.double = function () {
-    add(fingers*2);
-  };
-  this.getLog = function () {
-    return log;
-  };
-  this.isReady = function () {
-    return ready;
-  };
-  this.total = function () {
-    var t = 0;
-    for(var k = 0; k < log.length; k++){
-      t += log[k];
+  // events
+  opts.singleBtn.addEventListener('click', function () {
+    if (ready) {
+      setButtonsDisabled(true);
+      opts.statusDisplay.innerHTML = 'adding...';
+      add(fingers);
     }
-    return t;
-  };
-  this.didAdd = function (f) {
-    didAdd = f;
-  };
-  this.errAdd =function (f) {
-    errAdd = f;
-  };
+  });
+
+  opts.doubleBtn.addEventListener('click', function () {
+    if (ready) {
+      setButtonsDisabled(true);
+      opts.statusDisplay.innerHTML = 'adding...';
+      add(fingers * 2);
+    }
+  });
+
   return this;
 };
 
 window.addEventListener('load', function(){
 
-  var historyDisplay = document.querySelector('.history');
-  var resultDisplay = document.querySelector('.result');
-  var statusDisplay = document.querySelector('.status');
-  var singleBtn = document.querySelector('.single');
-  var doubleBtn = document.querySelector('.double');
+  var opts = {
+    historyDisplay: document.querySelector('.history'),
+    resultDisplay: document.querySelector('.result'),
+    statusDisplay: document.querySelector('.status'),
+    singleBtn: document.querySelector('.single'),
+    doubleBtn: document.querySelector('.double'),
+  };
 
-  h5calc = new H5Calc();
-
-  // events
-  singleBtn.addEventListener('click', function(){
-    if(h5calc.isReady()){
-      singleBtn.disabled = true;
-      doubleBtn.disabled = true;
-      statusDisplay.innerHTML = 'adding...';
-      h5calc.single();
-    }
-  });
-
-  doubleBtn.addEventListener('click', function(){
-    if(h5calc.isReady()){
-      singleBtn.disabled = true;
-      doubleBtn.disabled = true;
-      statusDisplay.innerHTML = 'adding...';
-      h5calc.double();
-    }
-  });
-
-  h5calc.didAdd(function(){
-    resultDisplay.innerHTML = h5calc.total();
-    historyDisplay.innerHTML = h5calc.getLog().join(' + ');
-    statusDisplay.innerHTML = '';
-    singleBtn.disabled = false;
-    doubleBtn.disabled = false;
-  });
-
-  h5calc.errAdd(function(){
-    singleBtn.disabled = false;
-    doubleBtn.disabled = false;
-    resultDisplay.innerHTML = h5calc.total();
-    historyDisplay.innerHTML = h5calc.getLog().join(' + ');
-    statusDisplay.innerHTML = '! try again';
-  });
+  h5calc = new H5Calc(opts);
 
 });
