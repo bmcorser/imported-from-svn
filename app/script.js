@@ -17,17 +17,10 @@ var H5Calc = function (opts) {
     return t;
   };
 
-  var addComplete = function () {
+  var addComplete = function (message) {
     opts.resultDisplay.innerHTML = total();
     opts.historyDisplay.innerHTML = log.join(' + ');
-    opts.statusDisplay.innerHTML = '';
-    setButtonsDisabled(false);
-  };
-
-  var addErr = function () {
-    opts.resultDisplay.innerHTML = total();
-    opts.historyDisplay.innerHTML = log.join(' + ');
-    opts.statusDisplay.innerHTML = '! try again';
+    opts.statusDisplay.innerHTML = message;
     setButtonsDisabled(false);
   };
 
@@ -39,10 +32,10 @@ var H5Calc = function (opts) {
         if(xhr.status == 200){
           log.push(f);
           ready = true;
-          addComplete();
+          addComplete('Ok');
         } else {
           ready = true;
-          addErr();
+          addComplete('! try again');
         }
       }
     };
