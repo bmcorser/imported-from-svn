@@ -7,9 +7,6 @@ var H5Calc = function () {
   var ready = true;
   var fingers = 5;
   var add = function (f) {
-    if (typeof willAdd == 'function') {
-      willAdd();
-    }
     ready = false;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -31,7 +28,7 @@ var H5Calc = function () {
     xhr.open("GET","http://www.httpbin.org/delay/1",true);
     xhr.send();
   };
-  var willAdd, didAdd, errAdd;
+  var didAdd, errAdd;
 
   //public
   this.single = function () {
@@ -52,9 +49,6 @@ var H5Calc = function () {
       t += log[k];
     }
     return t;
-  };
-  this.willAdd = function (f) {
-    willAdd = f;
   };
   this.didAdd = function (f) {
     didAdd = f;
