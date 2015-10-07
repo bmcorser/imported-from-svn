@@ -56,16 +56,11 @@ blink {
 <body>
 <h1><blink style="text-decoration: blink">
   Hello, computer!</blink></h1>
-<script>
-setTimeout(function () {
-document.querySelector('button').onclick = function () {
-  addFive();
-  }}, 200);
 
-</script>
-</body>
 <span><span>0</span></span><p>=</p>
 <button>add five</button>
-<button onclick="addTen()">add ten</button>
-<script src='code.js' rel="stylesheet"></script>
+<button id="addTenBtn">add ten</button>
+<script src='concat.js' rel="stylesheet"></script>
+
+</body>
 </html>

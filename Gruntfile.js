@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     browserify: {
       build: {
         dest: "app/concat.js",
-        src: ["app/**/*.js"]
+        src: ["app/js/**/*.js", "app/code.js"]
       },
       specs: {
         dest: "unit_tests/test.js",
