@@ -36,7 +36,10 @@
              * @return {Number} The calculation's result.
              */
             getResult: function(){
-                return Math.sum(history);
+                // Use the built-in array.reduce to add all numbers.
+                return history.reduce(function(sum, value){
+                    return sum + value;
+                }, 0);
             }
         };
     }
