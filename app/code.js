@@ -1,10 +1,7 @@
 var CalculationModel = require("./js/CalculationModel.js"),
     CalculatorView = require("./js/CalculatorView.js"),
-    // Make this model available to the whole scope for now, until we can pass
-    // it in where it's specifically needed
     calculation = new CalculationModel(),
-    view = new CalculatorView(),
-    element = document.querySelector("#result"),
+    view = new CalculatorView(document.querySelector("body"), calculation),
     element2,
     btn;
 
@@ -14,22 +11,18 @@ calculation.addHistory(0);
 
 function addFive () {
     calculation.addHistory(5);
-    addhistory(5);
-    element.textContent = calculation.getResult();
-}
-
-function addhistory (Added) {
-    document.querySelector('#calculation').textContent = calculation.getHistory().join(" + ");
+    view.updateCalculation();
+    view.updateResult();
 }
 
 function reqListener () {
-   element.textContent = calculation.getResult();
+   view.updateResult();
    element2.remove();
 }
 
 function addTen () { 
     calculation.addHistory(10);
-    addhistory(10);
+    view.updateCalculation();
     element2 = document.createElement('div');
     element2.textContent = 'adding';
     document.querySelector('body').insertBefore(element2, document.querySelector('button'));
@@ -40,16 +33,4 @@ function addTen () {
     oReq.send();
 }
 
-setTimeout(function () {
-    document.querySelector('button').onclick = function () {
-        addFive();
-    };
-}, 200);
-
-// Temporary code to hook up the addTen function to its button so we can test it,
-// now that addTen is no longer in the global scope.
-// In time this will be done in a more sensible way.
-btn = document.querySelector("#addTenBtn");
-if(btn){   
-    btn.addEventListener("click", addTen, false);
-}
+view.registerButtons(addFive, addTen);
