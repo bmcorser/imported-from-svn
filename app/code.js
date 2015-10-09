@@ -1,9 +1,7 @@
 var CalculationModel = require("./js/CalculationModel.js"),
     CalculatorView = require("./js/CalculatorView.js"),
     calculation = new CalculationModel(),
-    view = new CalculatorView(document.querySelector("body"), calculation),
-    element2,
-    btn;
+    view = new CalculatorView(document.querySelector("body"), calculation);
 
 // To comply with the way the old code functions, start with 0 in the history
 calculation.addHistory(0);
@@ -15,20 +13,18 @@ function addFive () {
     view.updateResult();
 }
 
-function reqListener () {
-   view.updateResult();
-   element2.remove();
-}
 
 function addTen () { 
-    calculation.addHistory(10);
+    var completeCalc = calculation.addHistory(10, true);
     view.updateCalculation();
-    element2 = document.createElement('div');
-    element2.textContent = 'adding';
-    document.querySelector('body').insertBefore(element2, document.querySelector('button'));
+    view.updatePending();
 
     var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
+    oReq.addEventListener("load", function(){
+        completeCalc();
+        view.updateResult();
+        view.updatePending();
+    });
     oReq.open("GET", "http://www.httpbin.org/delay/1", true);
     oReq.send();
 }

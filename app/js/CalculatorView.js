@@ -10,7 +10,8 @@
         var resultEl = body.querySelector("#result"),
             calculationEl = body.querySelector("#calculation"),
             addFiveButton = body.querySelector("#addFiveBtn"),
-            addTenButton = body.querySelector("#addTenBtn");
+            addTenButton = body.querySelector("#addTenBtn"),
+            pendingMsg = body.querySelector("#pendingMsg");
 
         return {
             /**
@@ -27,6 +28,34 @@
                 resultEl.textContent = model.getResult();
             },
 
+            /**
+             * Updates the visibility of the "adding" message element
+             */
+            updatePending: function(){
+                var pendingCls = pendingMsg.getAttribute("class") || "",
+                    hiddenClsIdx;
+
+                // Get the list of classes on the element
+                pendingCls = pendingCls.length > 0 ? pendingCls.split(" ") : [];
+                hiddenClsIdx = pendingCls.indexOf("hidden");
+
+                // If the model is pending and the element is hidden
+                // or if the model is not pending and the element is visible
+                // we need to change the class
+                if(model.isPending() === (hiddenClsIdx >= 0)){
+                    if(model.isPending()){
+                        // Show the message by removing the hidden class
+                        pendingCls.splice(hiddenClsIdx, 1);
+                    }else{
+                        // Hide the element
+                        pendingCls.push("hidden");
+                    }
+
+                    // Turn the array back into a string
+                    pendingCls = pendingCls.join(" ");
+                    pendingMsg.setAttribute("class", pendingCls);
+                }
+            },
 
             /**
              * Sets up the functions for the buttons' click handlers

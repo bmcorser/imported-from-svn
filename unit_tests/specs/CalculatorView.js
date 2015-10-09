@@ -47,6 +47,41 @@ describe("CalculatorView", function(){
         expect(mockResultDiv.innerText).toEqual("25");
     });
 
+    it("can update the visibility of the \"adding\" div", function(){
+        var mockModel = {
+                pending: false,
+                isPending: function(){ return this.pending; }
+            },
+            mockBody = document.createElement("body"),
+            mockPendingDiv = document.createElement("div"),
+            view;
+
+            // Set up the fake DOM
+            mockPendingDiv.setAttribute("id", "pendingMsg");
+            mockBody.appendChild(mockPendingDiv);
+
+            // Create the view
+            view = new CalculatorView(mockBody, mockModel);
+
+            // Pending: false should mean the hidden class is added
+            view.updatePending();
+            expect(mockPendingDiv.getAttribute("class")).toBe("hidden");
+
+            // Should be no change if called again
+            view.updatePending();
+            expect(mockPendingDiv.getAttribute("class")).toBe("hidden");
+
+            // Div should become visible when pending
+            mockModel.pending = true;
+
+            view.updatePending();
+            expect(mockPendingDiv.getAttribute("class")).toBe("");
+
+            // Should be no change if called again
+            view.updatePending();
+            expect(mockPendingDiv.getAttribute("class")).toBe("");
+    });
+
     it("registers functions on the buttons' click event handlers", function(){
         var mockBody = document.createElement("body"),
             mockFiveBtn = document.createElement("button"),
