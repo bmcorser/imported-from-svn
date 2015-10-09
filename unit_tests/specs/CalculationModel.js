@@ -44,4 +44,37 @@ describe("CalculationModel", function(){
         model.addHistory(10);
         expect(model.getResult()).toEqual(15);
     });
+
+    it("can delay the calculation of a value added to the history, and signals whether any calculations are currently pending", function(){
+        var model = new CalculationModel(),
+            resolve1,
+            resolve2;
+
+        // Pre-check: pending flag should be false
+        expect(model.isPending()).toBe(false);
+
+        // Create a couple of delayed calculation
+        resolve1 = model.addHistory(10, true);
+        resolve2 = model.addHistory(10, true);
+
+        // Should get functions as return values
+        expect(resolve1).toEqual(jasmine.any(Function));
+        expect(resolve2).toEqual(jasmine.any(Function));
+
+        // Values should be in the history but no calculation should be made yet
+        // and the pending flag should be on
+        expect(model.getHistory()).toEqual([10, 10]);
+        expect(model.getResult()).toBe(0);
+        expect(model.isPending()).toBe(true);
+
+        // Resolve first addition, check result and flag
+        resolve1();
+        expect(model.getResult()).toBe(10);
+        expect(model.isPending()).toBe(true);
+
+        // Resolve second addition, flag should be cleared
+        resolve2();
+        expect(model.getResult()).toBe(20);
+        expect(model.isPending()).toBe(false);
+    });
 });
