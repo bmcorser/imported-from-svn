@@ -1,27 +1,26 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     jshint: {
-      files: ['Gruntfile.js', 'app/js/**/*.js']
+      files: ['Gruntfile.js', 'dev/js/**/*.js']
     },
     browserify: {
       build: {
-        dest: "app/concat.js",
-        src: ["app/js/**/*.js", "app/code.js"]
+        dest: 'app/app.js',
+        src: ['dev/js/**/*.js']
       },
       test: {
-	dest: "unit_tests/src.js",
-	src: ["app/js/**/*.js"]
+      	dest: 'unit_tests/app-test.js',
+	      src: ['dev/js/**/*.js', '!dev/js/bootstrap.js']
       },
       specs: {
-        dest: "unit_tests/test.js",
-        src: ["unit_tests/specs/**/*.js"]
+        dest: 'unit_tests/all-tests.js',
+        src: ['unit_tests/specs/**/*.js']
       }
     },
     jasmine: {
-      src: "unit_tests/src.js",
+      src: 'unit_tests/app-test.js',
       options: {
-        specs: "unit_tests/test.js"
+        specs: 'unit_tests/all-tests.js'
       }
     }
   });

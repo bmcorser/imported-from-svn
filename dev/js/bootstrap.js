@@ -2,10 +2,10 @@
     "use strict";
 
     // Require the classes for the app
-    var CalculationModel = require("./js/CalculationModel.js"),
-    CalculatorView = require("./js/CalculatorView.js"),
-    CalculatorController = require("./js/CalculatorController.js"),
-    httpUtils = require("./js/HttpUtils.js"),
+    var CalculationModel = require("./CalculationModel.js"),
+    CalculatorView = require("./CalculatorView.js"),
+    CalculatorController = require("./CalculatorController.js"),
+    httpUtils = require("./HttpUtils.js"),
 
     // Set up the model, view and controller
     calculation = new CalculationModel(),

@@ -1,5 +1,5 @@
 describe("CalculatorView", function(){
-    var CalculatorView = require("../../app/js/CalculatorView.js");
+    var CalculatorView = require("../../dev/js/CalculatorView.js");
 
     it("can update the calculation element with the current calculation list", function(){
         var mockModel = {},

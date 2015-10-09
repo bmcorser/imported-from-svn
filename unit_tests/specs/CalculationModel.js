@@ -1,5 +1,5 @@
 describe("CalculationModel", function(){
-    var CalculationModel = require("../../app/js/CalculationModel.js");
+    var CalculationModel = require("../../dev/js/CalculationModel.js");
 
     it("has an array of calculation history that can be added to", function(){
         var model = new CalculationModel();

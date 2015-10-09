@@ -1,5 +1,5 @@
 describe("CalculatorController", function(){
-    var CalculatorController = require("../../app/js/CalculatorController.js");
+    var CalculatorController = require("../../dev/js/CalculatorController.js");
 
     it("has a function that adds five to the calculation", function(){
         var model = jasmine.createSpyObj("model", ["addHistory"]),
