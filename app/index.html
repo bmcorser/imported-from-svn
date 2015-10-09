@@ -1,63 +1,18 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!DOCTYPE html>
 
 <html>
+  <head>
+    <title>Whacky Calculator</title>
 
-<head>
+    <meta charset="utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title></title>
-
-<SCRIPT> 
-// Before you reuse this script you may want to have your head examined 
-// 
-// Copyright 1999 InsideDHTML.com, LLC.   
-
-function doBlink() { 
-    // Blink, Blink, Blink... 
-    var blink = document.all.tags("BLINK") 
-        for (var i=0; i < blink.length; i++) 
-              blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : "" 
-} 
-
-function startBlink() { 
-    // Make sure it is IE4 
-    if (document.all) 
-          setInterval("doBlink()",1000) 
-} 
-window.onload = startBlink; 
-
-</SCRIPT>
-
-<style>
-blink {
-  text-decoration: blink;
-}
-</style>
-
-<style>
-@-webkit-keyframes blink {
-      from {
-                opacity: 1.0;
-                    }
-                        to {
-                                  opacity: 0.0;
-                                      }
-}
-blink {
-      -webkit-animation-name: blink;
-          -webkit-animation-iteration-count: infinite;
-              -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
-                  -webkit-animation-duration: 1s;
-}
-</style>
-
-<link href='css.css'  rel="stylesheet">
-</head>
+    <link href='css.css' rel="stylesheet" />
+  </head>
 
   <body>
-    <h1>
-      <blink style="text-decoration: blink">
-        Hello, computer!
-      </blink>
+    <h1 class="blink">
+      Hello, computer!
     </h1>
 
     <div id="calculation">0</div>
@@ -69,8 +24,6 @@ blink {
     <button id="addFiveBtn">add five</button>
     <button id="addTenBtn">add ten</button>
 
-
-
-    <script src='concat.js' rel="stylesheet"></script>
+    <script src='concat.js'></script>
   </body>
 </html>

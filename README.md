@@ -1,48 +1,21 @@
-# “Imported from SVN” homework task
+# Whacky Calculator
 
-> A commit lands in your terminal. It bears the dreaded subject _Imported from
-SVN_.
+The Whacky Calculator is a stylish little app for adding numbers up in
+incriments of five and ten - but it's not as simple as it sounds!
 
-This repository contains that commit. Someone mucked up the export from SVN and
-lost the project’s commit history. You can just make out through the haze of
-cruft ... a [janky](http://www.urbandictionary.com/define.php?term=janky) old
-web application written in HTML, CSS and JavaScript. Unfortunately the code has
-suffered dreadful blight.
-
-Oh no!
-
-![blight](blight.jpg)
-
-We don’t know why this is, perhaps no one loved the code. That doesn’t matter
-now, let’s look at what we have in front of us. It’s not pretty:
-
- - No documentation!
- - No unit tests!
- - No modules!
- - No objects!
- - No build process!
-
-Let’s fix that.
+Simply hit the "add five" button to add that much to your calculation. If you
+press "add ten" however, you'll see it get added to the summation - but you'll
+have to wait for an HTTP request to complete before it gets added to the total!
+With its bizarre functionality and retro blinking text, this page is sure to make
+you LOL (that's Laugh Out Loud, folks)!
 
 
-## Specification
+## Setup
 
-This repository contains a web application that (whilst it appears to function
-correctly) intentionally has a number of bugs, bad practices and common
-mistakes. **THIS CODE IS INTENDED TO SEND YOUR WTFS/MIN THROUGH THE ROOF**
+To set up the development scripts you need to have [NPM](https://www.npmjs.com/)
+installed. Run `npm install` to install the required dependencies.
 
-This homework is to find the bugs, bad practices and common mistakes and apply
-the good and sensible practices alluded to in the introduction (along with any
-that aren’t mentioned but may be applicable) to the small codebase here. Steps
-undertaken should be documented and justified.
-
-Probably the easiest way to document and justify the steps taken is by
-carefully authoring your Git history: when you fix something, make a commit
-that explains what you did and why. Don’t worry, we’ll read the whole history.
-
-Please try to address one issue at a time (there are many, we know!) and make
-a commit that contains only changes that address a specific bad practice. You
-don’t have to do this, but it will make it easier for us to see your thinking.
-
-If there are any things that were really bugging you, but you didn’t have time
-to get to, write them down!
+Once that's done you can use Grunt to test and build your code;
+- `grunt test` will run jshint and jasmine tests
+- `grunt justbuild` will simply build the production script without testing
+- `grunt` will run the tests and build if they're successful

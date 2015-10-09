@@ -1,5 +1,5 @@
 {
-  "name": "calculator",
+  "name": "Whacky Calculator",
   "devDependencies": {
     "browserify": "~11.2.0",
     "grunt": "~0.4.5",
