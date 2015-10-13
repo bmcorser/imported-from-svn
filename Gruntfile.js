@@ -9,8 +9,8 @@ module.exports = function(grunt) {
         src: ['dev/js/**/*.js']
       },
       test: {
-      	dest: 'unit_tests/app-test.js',
-	      src: ['dev/js/**/*.js', '!dev/js/bootstrap.js']
+        dest: 'unit_tests/app-test.js',
+        src: ['dev/js/**/*.js', '!dev/js/bootstrap.js']
       },
       specs: {
         dest: 'unit_tests/all-tests.js',
