@@ -32,29 +32,10 @@
              * Updates the visibility of the "adding" message element
              */
             updatePending: function(){
-                var pendingCls = pendingMsg.getAttribute("class") || "",
-                    hiddenClsIdx;
-
-                // Get the list of classes on the element
-                pendingCls = pendingCls.length > 0 ? pendingCls.split(" ") : [];
-                hiddenClsIdx = pendingCls.indexOf("hidden");
-
-                // If the model is pending and the element is hidden
-                // or if the model is not pending and the element is visible
-                // we need to change the class
-                if(model.isPending() === (hiddenClsIdx >= 0)){
-                    if(model.isPending()){
-                        // Show the message by removing the hidden class
-                        pendingCls.splice(hiddenClsIdx, 1);
-                    }else{
-                        // Hide the element
-                        pendingCls.push("hidden");
-                    }
-
-                    // Turn the array back into a string
-                    pendingCls = pendingCls.join(" ");
-                    pendingMsg.setAttribute("class", pendingCls);
-                }
+                return model.isPending()
+                  ? pendingMsg.classList.remove('hidden')  // jshint ignore:line
+                  : pendingMsg.classList.add('hidden')
+                  ;
             },
 
             /**
