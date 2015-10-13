@@ -1,2 +1,4 @@
 node_modules
 app/app.js
+unit_tests/app-test.js
+unit_tests/all-tests.js
